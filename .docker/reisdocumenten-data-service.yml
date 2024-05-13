@@ -6,10 +6,11 @@ services:
     image: haalcentraal.azurecr.io/gba-reisdocumenten-api:2.0.8
     environment:
       - ASPNETCORE_URLS=http://+;
-      - Database__Host=postgres
-      - Database__Username=root
-      - Database__Password=root
-      - Database__Database=rvig_haalcentraal_testdata
+      - Database__ConnectionString=Host=postgres;port=5432;Username=root;Password=root;Database=rvig_haalcentraal_testdata
+      # - Database__Host=postgres
+      # - Database__Username=root
+      # - Database__Password=root
+      # - Database__Database=rvig_haalcentraal_testdata
       - HaalcentraalApi__MaxSearchResults=10
       - AuthenticationTypes=Basic
       # - ProtocolleringAuthorization__UseAuthorizationChecks=false
