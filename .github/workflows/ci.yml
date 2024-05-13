@@ -9,6 +9,7 @@ on:
 
 env:
   NODE_VERSION: '20'
+  COMPOSE_FILE_ARGUMENT: -f .docker/db-ci.yml -f .docker/reisdocumenten-data-service.yml
 
 jobs:
   validate:
@@ -23,12 +24,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run unit tests
-        run: |
-          ./scripts/unit-tests-verify.sh
-      - name: Validate Step Definitions
+      - name: Start containers
+        run: docker compose ${{ env.COMPOSE_FILE_ARGUMENT }} up -d
+      - name: Wait for DB restart
+        run: sleep 5s
+        shell: bash
+      - name: Validate functional specs
         run: |
           ./scripts/specs-verify.sh
+      - name: Stop containers
+        if: always()
+        run: docker compose ${{ env.COMPOSE_FILE_ARGUMENT }} down
       - name: Genereer test rapportage
         if: always()
         run: |

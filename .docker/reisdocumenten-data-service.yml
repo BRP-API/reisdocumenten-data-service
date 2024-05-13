@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  reisdocumenten-data-service:
+    container_name: reisdocumenten-data-service
+    image: haalcentraal.azurecr.io/gba-reisdocumenten-api:2.0.8
+    environment:
+      - ASPNETCORE_URLS=http://+;
+      - Database__Host=postgres
+      - Database__Username=root
+      - Database__Password=root
+      - Database__Database=rvig_haalcentraal_testdata
+      - HaalcentraalApi__MaxSearchResults=10
+      - AuthenticationTypes=Basic
+      # - ProtocolleringAuthorization__UseAuthorizationChecks=false
+      # - ProtocolleringAuthorization__UseProtocollering=false
+    ports:
+      - "8000:80"
+    networks:
+      - brp-api-network
+
+networks:
+  brp-api-network:
+   name: brp-api-network

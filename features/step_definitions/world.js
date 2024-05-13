@@ -17,17 +17,17 @@ class World {
             cleanup: true,
             deleteIndividualRecords: true,
             poolConfig: {
-                user: '',
-                host: '',
+                user: 'root',
+                host: 'localhost',
                 database: 'rvig_haalcentraal_testdata',
-                password: '',
+                password: 'root',
                 port: 5432,
                 allowExitOnIdle: true
             }
         };
 
         this.context.oAuth = {
-            enable: true,
+            enable: false,
             accessTokenUrl: 'http://identityserver:6000/connect/token',
             clients:[
                 {
