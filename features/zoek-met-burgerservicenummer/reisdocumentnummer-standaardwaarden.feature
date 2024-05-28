@@ -1,6 +1,6 @@
 # language: nl
 
-@api
+@api @geen-protocollering
 Functionaliteit: Reisdocumentnummer met standaardwaarde
 
   Achtergrond:

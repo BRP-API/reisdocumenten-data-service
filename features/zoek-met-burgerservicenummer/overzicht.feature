@@ -1,6 +1,6 @@
 #language: nl
 
-@api
+@api @geen-protocollering
 Functionaliteit: Zoek met burgerservicenummer
 
   Achtergrond:
@@ -51,7 +51,6 @@ Regel: voor het zoeken van reisdocumenten van een persoon moet het burgerservice
     | naam               | waarde    |
     | reisdocumentnummer | ID82046A7 |
 
-  @geen-protocollering
   Scenario: de gezochte persoon heeft geen reisdocument
     Als reisdocumenten wordt gezocht met de volgende parameters
     | naam                | waarde                     |
@@ -60,7 +59,6 @@ Regel: voor het zoeken van reisdocumenten van een persoon moet het burgerservice
     | fields              | reisdocumentnummer,houder  |
     Dan heeft de response 0 reisdocumenten
 
-  @geen-protocollering
   Scenario: de gezochte persoon bestaat niet
     Als reisdocumenten wordt gezocht met de volgende parameters
     | naam                | waarde                     |
@@ -71,7 +69,6 @@ Regel: voor het zoeken van reisdocumenten van een persoon moet het burgerservice
 
 Regel: bij zoeken van reisdocumenten met burgerservicenummer worden alleen reisdocumenten geleverd die volgens de registratie nog in het bezit zijn van de persoon
 
-  @geen-protocollering
   Scenario: de gezochte persoon heeft het reisdocument ingeleverd
     Gegeven de persoon heeft een 'reisdocument' met de volgende gegevens
     | naam                                                                    | waarde    |

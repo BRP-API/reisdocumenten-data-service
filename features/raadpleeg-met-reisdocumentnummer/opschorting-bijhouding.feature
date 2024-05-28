@@ -1,6 +1,6 @@
 #language: nl
 
-@api
+@api @geen-protocollering
 Functionaliteit: RaadpleegMetReisdocumentnummer van persoonslijst met opschorting bijhouding
 
   Achtergrond:
@@ -13,7 +13,6 @@ Functionaliteit: RaadpleegMetReisdocumentnummer van persoonslijst met opschortin
 
   Regel: Een reisdocument op een persoonslijst met reden opschorting bijhouding "W" (wissen) wordt niet geleverd
 
-    @geen-protocollering
     Abstract Scenario: persoonslijst heeft opschorting bijhouding reden "W" en <fields> van het reisdocument wordt gevraagd
       Gegeven de persoon heeft de volgende 'inschrijving' gegevens
       | datum opschorting bijhouding (67.10) | reden opschorting bijhouding (67.20) |

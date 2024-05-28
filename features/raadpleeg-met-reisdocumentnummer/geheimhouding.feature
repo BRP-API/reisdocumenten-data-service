@@ -1,6 +1,6 @@
 # language: nl
 
-@api
+@api @geen-protocollering
 Functionaliteit: gba geheimhouding leveren bij RaadpleegMetReisdocumentnummer
 
   Wanneer een consumer van de Reisdocumenten API gegevens bevraagt van een persoon die geen toestemming heeft gegeven voor het verstrekken van zijn gegevens aan derden

@@ -1,6 +1,6 @@
 #language: nl
 
-@api
+@api @geen-protocollering
 Functionaliteit: Raadpleeg met reisdocumentnummer
 
   Achtergrond:
@@ -31,7 +31,6 @@ Regel: voor het raadplegen van een reisdocument moet het reisdocumentnummer word
     | naam                | waarde    |
     | burgerservicenummer | 000000152 |
 
-  @geen-protocollering
   Scenario: Raadpleeg een niet bestaand reisdocument
     Gegeven de persoon heeft een 'reisdocument' met de volgende gegevens
     | naam                                        | waarde    |

@@ -1,6 +1,6 @@
 #language: nl
 
-@api
+@api @geen-protocollering
 Functionaliteit: zoeken van de actuele reisdocumenten van een persoon met behulp van zijn burgerservicenummer
   Als afnemer
   Wil ik de reisdocumenten kunnen bevragen van een persoon
@@ -16,7 +16,6 @@ Functionaliteit: zoeken van de actuele reisdocumenten van een persoon met behulp
 
   Regel: bij zoeken van reisdocumenten met burgerservicenummer worden alleen reisdocumenten geleverd die volgens de registratie nog in het bezit zijn van de persoon
 
-    @geen-protocollering
     Abstract Scenario: de persoon heeft een <omschrijving> en heeft geen ander reisdocument
       Gegeven de persoon heeft een 'reisdocument' met de volgende gegevens
       | naam                                                                    | waarde       |

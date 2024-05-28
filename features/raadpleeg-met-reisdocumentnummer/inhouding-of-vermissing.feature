@@ -1,6 +1,6 @@
 #language: nl
 
-@api
+@api @geen-protocollering
 Functionaliteit: Aanduiding inhouding/vermissing van reisdocument vragen geeft ook de omschrijving van de aanduiding
 
   Achtergrond:
