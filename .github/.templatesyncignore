@@ -1,2 +1,4 @@
 README.md
 .github/workflows/ci.yml
+scripts/generate-cucumber-reports.js
+scripts/specs-verify.sh
