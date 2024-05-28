@@ -5,14 +5,33 @@ on:
     paths:
       - features/**
       - .github/workflows/ci.yml
+      - .docker/reisdocumenten-data-service.yml
   workflow_dispatch:
 
 env:
   NODE_VERSION: '20'
   COMPOSE_FILE_ARGUMENT: -f .docker/db-ci.yml -f .docker/reisdocumenten-data-service.yml
+  DATA_SERVICE_DOCKER_FILE_PATH: .docker/reisdocumenten-data-service.yml
+  BUILD_RUN: ''
+  APP_VERSION: ''
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set environment variables
+        run: |
+          export TZ="Europe/Amsterdam"
+          echo "BUILD_RUN=$(sed -n 's/image:.*:.*-\(.*\)/\1/p' ${{ env.DATA_SERVICE_DOCKER_FILE_PATH}})" >> $GITHUB_ENV
+
+          echo "APP_VERSION=$(sed -n 's/image:.*:\(.*\)-.*/\1/p' ${{ env.DATA_SERVICE_DOCKER_FILE_PATH}})" >> $GITHUB_ENV
+    outputs:
+      app_version: ${{ env.APP_VERSION }}
+      build_run: ${{ env.BUILD_RUN }}
   validate:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -44,10 +63,21 @@ jobs:
       - name: Genereer test rapportage
         if: always()
         run: |
-          node ./scripts/generate-cucumber-reports.js
+          node ./scripts/generate-cucumber-reports.js ${{ needs.build.outputs.app_version }} ${{ needs.build.outputs.build_run }} ${{ github.ref_name }}
       - name: Upload test rapportage
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Reports
           path: test-reports
+      - name: Push test rapportage naar brp-api.github.io repo
+        if: always()
+        uses: tech-thinker/push-to-repo@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
+        with:
+          source-directory: test-reports/cucumber-js/reports
+          destination-repository-name: brp-api.github.io
+          destination-github-username: BRP-API
+          target-branch: test-reports/reisdocumenten
+          commit-message: "test rapporten van build: ${{ needs.build.outputs.build_run }}"
