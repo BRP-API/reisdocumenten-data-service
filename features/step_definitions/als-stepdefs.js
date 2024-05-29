@@ -23,6 +23,10 @@ When(/^([a-zA-Z-]*) wordt gezocht met de volgende parameters$/, async function (
         fs.writeFileSync(this.context.downstreamApiDataPath + '/response-headers.json',
                          JSON.stringify(this.context.downstreamApiResponseHeaders[0], null, '\t'));
     }
+    if(this.context.downstreamApiResponseBody !== undefined) {
+        fs.writeFileSync(this.context.downstreamApiDataPath + '/response-body.json',
+                         this.context.downstreamApiResponseBody);
+    }
 
     if(this.context.sqlData === undefined) {
         this.context.sqlData = [{}];
