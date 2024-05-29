@@ -3,7 +3,7 @@ version: '3.7'
 services:
   reisdocumenten-data-service:
     container_name: reisdocumenten-data-service
-    image: haalcentraal.azurecr.io/gba-reisdocumenten-api:2.0.11-2024052402
+    image: haalcentraal.azurecr.io/gba-reisdocumenten-api:2.0.12-202405291212
     environment:
       - ASPNETCORE_URLS=http://+;
       - Database__Host=postgres
@@ -13,8 +13,13 @@ services:
       - HaalcentraalApi__MaxSearchResults=10
       - ProtocolleringAuthorization__UseAuthorizationChecks=false
       - ProtocolleringAuthorization__UseProtocollering=false
+      - Ecs__Path=/var/log/reisdocumenten-data-service.json
+      - Serilog__MinimumLevel__Default=Warning
+      - Serilog__MinimumLevel__Override__Serilog=Information
     ports:
       - "8000:80"
+    volumes:
+      - ../test-data/logs:/var/log
     networks:
       - brp-api-network
 
