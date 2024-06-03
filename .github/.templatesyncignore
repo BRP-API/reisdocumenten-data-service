@@ -1,4 +1,4 @@
-README.md
-.github/workflows/ci.yml
-scripts/generate-cucumber-reports.js
-scripts/specs-verify.sh
+:!.github/actions/*.*
+:!features/docs/*.*
+:!features/step_definitions/*.*
+*
