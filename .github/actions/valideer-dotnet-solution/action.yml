@@ -1,0 +1,26 @@
+name: Valideer .NET solution
+description: Compileren van de projecten en uitvoeren van de unit tests opgenomen in een .NET solution bestand
+
+inputs:
+  path-solution-file:
+    description: het pad van een .NET solution file
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          6.0.x
+          8.0.x
+    - name: Restore dependencies
+      run: dotnet restore ${{ inputs.path-solution-file }}
+      shell: bash
+    - name: Build
+      run: dotnet build ${{ inputs.path-solution-file }} --configuration Release --no-restore
+      shell: bash
+    - name: Run unit tests
+      run: dotnet test ${{ inputs.path-solution-file }} --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-reports/coverage
+      shell: bash

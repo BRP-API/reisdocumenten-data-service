@@ -1,0 +1,31 @@
+name: Zet versie met build run identifier in csproj file
+description: Voeg de build run conform semver in het Version element van de opgegeven csproj bestand
+
+# source: https://www.jameskerr.blog/posts/sharing-steps-in-github-action-workflows/
+
+inputs:
+  path-csproj-file:
+    description: path van het csproj bestand
+    required: true
+  build-run:
+    description: string dat als build wordt gebruikt conform semver
+    required: true
+outputs:
+  version:
+    description: de versie string in het Version element 
+    value: ${{ steps.get-version.outputs.VERSION }}
+
+runs:
+  using: composite
+  steps:
+    - name: Get version element value
+      id: get-version
+      run: |
+        echo "VERSION=$(sed -n 's/.*<Version>\([0-9.]*\).*/\1/p' ${{ inputs.path-csproj-file }})" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Append build run identifier
+      run: |
+        search_string="\(<Version>\([0-9.]*\)\)"
+        replace_string="<Version>${{ steps.get-version.outputs.VERSION }}+${{ inputs.build-run }}"
+        sed -i "s/$search_string/$replace_string/" ${{ inputs.path-csproj-file }}
+      shell: bash
