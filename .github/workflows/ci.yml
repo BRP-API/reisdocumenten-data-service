@@ -55,25 +55,26 @@ jobs:
           ./scripts/specs-verify.sh
       - name: Stop containers
         if: always()
-        run: docker compose ${{ env.COMPOSE_FILE_ARGUMENT }} down
+        run: |
+          ./scripts/containers-stop.sh ci
       - name: Genereer test rapportage
         if: always()
         run: |
           node ./scripts/generate-cucumber-reports.js ${{ steps.app-version.outputs.version }} ${{ steps.build-run-id.outputs.build_run }} ${{ github.ref_name }}
-      # - name: Upload test rapportage
-      #   if: always()
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: Reports
-      #     path: test-reports
-      # - name: Push test rapportage naar brp-api.github.io repo
-      #   if: always()
-      #   uses: tech-thinker/push-to-repo@main
-      #   env:
-      #     API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
-      #   with:
-      #     source-directory: test-reports/cucumber-js/reports
-      #     destination-repository-name: brp-api.github.io
-      #     destination-github-username: BRP-API
-      #     target-branch: test-reports/reisdocumenten
-      #     commit-message: "test rapporten van build: ${{ steps.build-run-id.outputs.build-run }}"
+      - name: Upload test rapportage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Reports
+          path: test-reports
+      - name: Push test rapportage naar brp-api.github.io repo
+        if: always()
+        uses: tech-thinker/push-to-repo@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
+        with:
+          source-directory: test-reports/cucumber-js/reports
+          destination-repository-name: brp-api.github.io
+          destination-github-username: BRP-API
+          target-branch: test-reports/reisdocumenten
+          commit-message: "test rapporten van build: ${{ steps.build-run-id.outputs.build-run }}"
