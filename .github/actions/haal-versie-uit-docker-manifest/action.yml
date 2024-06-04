@@ -1,0 +1,20 @@
+name: Haal versie uit Docker manifest
+description: Haal de versie uit een docker manifest
+
+inputs:
+  path-docker-manifest:
+    description: het pad van een docker manifest
+    required: true
+outputs:
+  version:
+    description: de versie string in de docker manifest
+    value: ${{ steps.get-version.outputs.VERSION }}
+
+runs:
+  using: composite
+  steps:
+    - name: Get version
+      id: get-version
+      run: |
+        echo "APP_VERSION=$(sed -n 's/image:.*:\(.*\)-.*/\1/p' ${{ inputs.path-docker-manifest }})" >> $GITHUB_OUTPUT
+      shell: bash
