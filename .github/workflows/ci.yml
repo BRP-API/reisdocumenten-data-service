@@ -10,47 +10,43 @@ on:
 
 env:
   NODE_VERSION: '20'
-  COMPOSE_FILE_ARGUMENT: -f .docker/db-ci.yml -f .docker/reisdocumenten-data-service.yml
   DATA_SERVICE_DOCKER_FILE_PATH: .docker/reisdocumenten-data-service.yml
-  BUILD_RUN: ''
-  APP_VERSION: ''
 
 jobs:
-  build:
+  continuous-integration:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-      - name: Set environment variables
-        run: |
-          export TZ="Europe/Amsterdam"
-          echo "BUILD_RUN=$(sed -n 's/image:.*:.*-\(.*\)/\1/p' ${{ env.DATA_SERVICE_DOCKER_FILE_PATH}})" >> $GITHUB_ENV
-
-          echo "APP_VERSION=$(sed -n 's/image:.*:\(.*\)-.*/\1/p' ${{ env.DATA_SERVICE_DOCKER_FILE_PATH}})" >> $GITHUB_ENV
-    outputs:
-      app_version: ${{ env.APP_VERSION }}
-      build_run: ${{ env.BUILD_RUN }}
-  validate:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Haal build run identifier uit Docker manifest
+        id: build-run-id
+        uses: ./.github/actions/haal-build-run-identifier-uit-docker-manifest
+        with:
+          path-docker-manifest: ${{ env.DATA_SERVICE_DOCKER_FILE_PATH }}
+      - name: Haal versie uit Docker manifest
+        id: app-version
+        uses: ./.github/actions/haal-versie-uit-docker-manifest
+        with:
+          path-docker-manifest: ${{ env.DATA_SERVICE_DOCKER_FILE_PATH }}
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Install dependencies
         run: npm ci
-
       - name: Login to P5 Container Registry
         uses: docker/login-action@v2.1.0
         with:
           registry: haalcentraal.azurecr.io
           username: ${{ secrets.P5_CR_USER }}
           password: ${{ secrets.P5_CR_PWD }}
+      - name: Set run permissions on script folder
+        uses: ./.github/actions/zet-run-bash-scripts-permission
+        with:
+          path-bash-file-or-folder: ./scripts/*
       - name: Start containers
-        run: docker compose ${{ env.COMPOSE_FILE_ARGUMENT }} up -d
+        run: |
+          ./scripts/containers-start.sh ci
       - name: Wait for DB restart
         run: sleep 5s
         shell: bash
@@ -63,21 +59,21 @@ jobs:
       - name: Genereer test rapportage
         if: always()
         run: |
-          node ./scripts/generate-cucumber-reports.js ${{ needs.build.outputs.app_version }} ${{ needs.build.outputs.build_run }} ${{ github.ref_name }}
-      - name: Upload test rapportage
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: Reports
-          path: test-reports
-      - name: Push test rapportage naar brp-api.github.io repo
-        if: always()
-        uses: tech-thinker/push-to-repo@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
-        with:
-          source-directory: test-reports/cucumber-js/reports
-          destination-repository-name: brp-api.github.io
-          destination-github-username: BRP-API
-          target-branch: test-reports/reisdocumenten
-          commit-message: "test rapporten van build: ${{ needs.build.outputs.build_run }}"
+          node ./scripts/generate-cucumber-reports.js ${{ steps.app-version.outputs.version }} ${{ steps.build-run-id.outputs.build_run }} ${{ github.ref_name }}
+      # - name: Upload test rapportage
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: Reports
+      #     path: test-reports
+      # - name: Push test rapportage naar brp-api.github.io repo
+      #   if: always()
+      #   uses: tech-thinker/push-to-repo@main
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
+      #   with:
+      #     source-directory: test-reports/cucumber-js/reports
+      #     destination-repository-name: brp-api.github.io
+      #     destination-github-username: BRP-API
+      #     target-branch: test-reports/reisdocumenten
+      #     commit-message: "test rapporten van build: ${{ steps.build-run-id.outputs.build-run }}"
