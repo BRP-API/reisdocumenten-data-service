@@ -5,8 +5,10 @@ const { addDefaultAutorisatieSettings,
         handleRequest } = require('./requestHelpers');
 
 const apiEndpointPrefixMap = new Map([
+    ['bewoningen', 'bewoning'],
     ['personen', 'brp'],
     ['reisdocumenten', 'reisdocumenten'],
+    ['verblijfplaatshistorie', 'brphistorie'],
     ['bestaat-niet', 'brp']
 ]);
 
