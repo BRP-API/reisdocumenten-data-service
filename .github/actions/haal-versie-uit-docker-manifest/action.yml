@@ -8,7 +8,7 @@ inputs:
 outputs:
   version:
     description: de versie string in de docker manifest
-    value: ${{ steps.get-version.outputs.VERSION }}
+    value: ${{ steps.get-version.outputs.APP_VERSION }}
 
 runs:
   using: composite

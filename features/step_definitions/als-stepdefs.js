@@ -5,9 +5,14 @@ const { addDefaultAutorisatieSettings,
         handleRequest } = require('./requestHelpers');
 
 const apiEndpointPrefixMap = new Map([
+    ['bewoningen', 'bewoning'],
     ['personen', 'brp'],
     ['reisdocumenten', 'reisdocumenten'],
-    ['bestaat-niet', 'brp']
+    ['verblijfplaatshistorie', 'brphistorie'],
+    // niet bestaande endpoints
+    ['ingezetenen', 'brp'],
+    ['paspoorten', 'reisdocumenten'],
+    ['verblijfhistorie', 'brphistorie']
 ]);
 
 When(/^([a-zA-Z-]*) wordt gezocht met de volgende parameters$/, async function (endpoint, dataTable) {

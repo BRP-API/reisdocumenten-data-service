@@ -1,7 +1,10 @@
 #!/bin/bash
 
 PARAMS="{ \
-    \"enableOAuth\": \"false\" \
+    \"logFileToAssert\": \"./test-data/logs/reisdocumenten-data-service.json\", \
+    \"oAuth\": { \
+        \"enable\": false \
+    } \
 }"
 
 npx cucumber-js -f json:./test-reports/cucumber-js/step-definitions/test-result-zonder-dependency-integratie.json \
