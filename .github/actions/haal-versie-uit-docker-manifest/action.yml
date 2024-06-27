@@ -16,5 +16,5 @@ runs:
     - name: Get version
       id: get-version
       run: |
-        echo "APP_VERSION=$(sed -n 's/image:.*:\(.*\)-.*/\1/p' ${{ inputs.path-docker-manifest }})" >> $GITHUB_OUTPUT
+        echo "APP_VERSION=$(sed -n 's/.*image:.*:\(.*\)-.*/\1/p' ${{ inputs.path-docker-manifest }})" >> $GITHUB_OUTPUT
       shell: bash
