@@ -3,7 +3,7 @@ version: '3.7'
 services:
   reisdocumenten-data-service:
     container_name: reisdocumenten-data-service
-    image: haalcentraal.azurecr.io/gba-reisdocumenten-api:2.0.12-202405291212
+    image: ghcr.io/brp-api/reisdocumenten-data-service:2.0.12-202408051728
     environment:
       - ASPNETCORE_URLS=http://+;
       - Database__Host=postgres
