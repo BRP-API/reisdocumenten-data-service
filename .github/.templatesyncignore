@@ -1,3 +1,5 @@
+:!package.json
+:!package-lock.json
 :!.github/actions/*.*
 :!features/docs/*.*
 :!features/step_definitions/*.*
