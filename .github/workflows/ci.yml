@@ -11,6 +11,7 @@ on:
 env:
   NODE_VERSION: '20'
   DATA_SERVICE_DOCKER_FILE_PATH: .docker/reisdocumenten-data-service.yml
+  SPEC_VERIFY_STEP_SUMMARY_FILE_PATH: ./test-reports/cucumber-js/reisdocumenten/step-summary.txt
 
 jobs:
   continuous-integration:
@@ -55,7 +56,12 @@ jobs:
         if: always()
         run: |
           ./scripts/containers-stop.sh ci
-
+      - name: Voeg test summary toe aan Github Step Summary
+        if: always()
+        run: |
+          node ./scripts/generate-step-summary.js
+          echo "### Cucumber Test Reports" >> $GITHUB_STEP_SUMMARY
+          cat ${{ env.SPEC_VERIFY_STEP_SUMMARY_FILE_PATH }} >> $GITHUB_STEP_SUMMARY
       - name: Genereer test rapportage
         if: always()
         run: |
