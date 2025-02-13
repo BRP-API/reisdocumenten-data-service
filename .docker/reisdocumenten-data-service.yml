@@ -14,6 +14,7 @@ services:
       - ProtocolleringAuthorization__UseAuthorizationChecks=false
       - ProtocolleringAuthorization__UseProtocollering=false
       - Ecs__Path=/var/log/reisdocumenten-data-service.json
+      - Ecs__SecuredPath=/var/log/reisdocumenten-data-service-secured.json
       - Ecs__FileSizeLimitBytes=1073741824
       - Ecs__RetainedFileCountLimit=10
       - Serilog__MinimumLevel__Default=Warning
