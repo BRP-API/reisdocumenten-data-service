@@ -7,7 +7,7 @@ fs.writeFileSync(outputFile, '', 'utf8');
 
 const fileMap = new Map([
     ["./../test-reports/cucumber-js/step-definitions/test-result-zonder-dependency-integratie-summary.txt", "docs (zonder integratie)"],
-    ["./../test-reports/cucumber-js/reisdocumenten/test-result-raadpleeg-met-reisdocumentnummer.txt", "raadpleeg met reisdocumentnummer"],
+    ["./../test-reports/cucumber-js/reisdocumenten/test-result-raadpleeg-met-reisdocumentnummer-summary.txt", "raadpleeg met reisdocumentnummer"],
     ["./../test-reports/cucumber-js/reisdocumenten/test-result-zoek-met-burgerservicenummer-summary.txt", "zoek met burgerservicenummer"],
 ]);
 
