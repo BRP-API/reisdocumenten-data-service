@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Rvig.HaalCentraalApi": {
+    "Rvig.BrpApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

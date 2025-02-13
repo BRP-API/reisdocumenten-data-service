@@ -4,10 +4,10 @@ using System;
 using Rvig.Data.Reisdocumenten.Mappers;
 using Rvig.Data.Reisdocumenten.Repositories;
 using Rvig.Data.Reisdocumenten.Services;
-using Rvig.HaalCentraalApi.Reisdocumenten.Interfaces;
-using Rvig.HaalCentraalApi.Reisdocumenten.Services;
-using Rvig.HaalCentraalApi.Reisdocumenten.Validation.RequestModelValidators;
 using Microsoft.AspNetCore.Builder;
+using Rvig.BrpApi.Reisdocumenten.Interfaces;
+using Rvig.BrpApi.Reisdocumenten.Validation.RequestModelValidators;
+using Rvig.BrpApi.Reisdocumenten.Services;
 
 var servicesDictionary = new Dictionary<Type, Type>
 {

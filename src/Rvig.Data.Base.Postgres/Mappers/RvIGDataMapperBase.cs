@@ -1,10 +1,10 @@
 ﻿using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Base.Postgres.Helpers;
 using Rvig.Data.Base.Postgres.Mappers.Helpers;
-using Rvig.HaalCentraalApi.Shared.ApiModels.Universal;
-using Rvig.HaalCentraalApi.Shared.Helpers;
-using Rvig.HaalCentraalApi.Shared.ApiModels.PersonenHistorieBase;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.ApiModels.PersonenHistorieBase;
+using Rvig.BrpApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.ApiModels.Universal;
+using Rvig.BrpApi.Shared.Helpers;
 
 namespace Rvig.Data.Base.Postgres.Mappers;
 

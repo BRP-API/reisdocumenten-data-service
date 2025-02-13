@@ -28,7 +28,7 @@
     <ProjectReference Include="..\Rvig.Data.Base.WebApi\Rvig.Data.Base.WebApi.csproj" />
     <ProjectReference Include="..\Rvig.Data.Base\Rvig.Data.Base.csproj" />
     <ProjectReference Include="..\Rvig.Data.Base.Postgres\Rvig.Data.Base.Postgres.csproj" />
-    <ProjectReference Include="..\Rvig.HaalCentraalApi.Shared\Rvig.HaalCentraalApi.Shared.csproj" />
+    <ProjectReference Include="..\Rvig.BrpApi.Shared\Rvig.BrpApi.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

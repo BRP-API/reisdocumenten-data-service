@@ -3,12 +3,12 @@ using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Base.Helpers;
 using Rvig.Data.Base.Services;
 using Rvig.Data.Base.Postgres.Repositories;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
-using Rvig.HaalCentraalApi.Shared.Interfaces;
+using Rvig.BrpApi.Shared.Interfaces;
+using Rvig.BrpApi.Shared.Exceptions;
 
 namespace Rvig.Data.Base.Postgres.Services
 {
-	public class GetAndMapGbaServiceBase
+    public class GetAndMapGbaServiceBase
 	{
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		protected readonly IProtocolleringService _protocolleringService;

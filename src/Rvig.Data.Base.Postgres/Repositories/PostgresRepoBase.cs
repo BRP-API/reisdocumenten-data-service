@@ -1,9 +1,9 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Options;
 using Npgsql;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
-using Rvig.HaalCentraalApi.Shared.Helpers;
-using Rvig.HaalCentraalApi.Shared.Options;
+using Rvig.BrpApi.Shared.Helpers;
+using Rvig.BrpApi.Shared.Options;
+using Rvig.BrpApi.Shared.Exceptions;
 using System.Data;
 using static Dapper.SqlMapper;
 

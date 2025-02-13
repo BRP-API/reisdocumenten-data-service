@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.Data.Base", "Rvig.Data.Base\Rvig.Data.Base.csproj", "{CDB82893-2494-44C6-8230-FA991F5DCB28}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.HaalCentraalApi.Shared", "Rvig.HaalCentraalApi.Shared\Rvig.HaalCentraalApi.Shared.csproj", "{975C3A26-8BDE-4AB6-9F49-DF4B00790904}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.BrpApi.Shared", "Rvig.BrpApi.Shared\Rvig.BrpApi.Shared.csproj", "{975C3A26-8BDE-4AB6-9F49-DF4B00790904}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.HaalCentraalApi.Reisdocumenten", "Rvig.HaalCentraalApi.Reisdocumenten\Rvig.HaalCentraalApi.Reisdocumenten.csproj", "{0D9A8162-A2D7-4B56-A697-E87D541E61E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.BrpApi.Reisdocumenten", "Rvig.BrpApi.Reisdocumenten\Rvig.BrpApi.Reisdocumenten.csproj", "{0D9A8162-A2D7-4B56-A697-E87D541E61E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apis", "Apis", "{4728F96B-F2CC-4D46-9833-933220F7D644}"
 EndProject

@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Rvig.Base.App.Services;
-using Rvig.HaalCentraalApi.Shared.ApiModels.Universal;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
-using Rvig.HaalCentraalApi.Shared.Helpers;
+using Rvig.BrpApi.Shared.ApiModels.Universal;
+using Rvig.BrpApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.Helpers;
 
 namespace Rvig.Base.App.Controllers;
 

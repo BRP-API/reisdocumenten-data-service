@@ -3,12 +3,12 @@ using System.Net.Http.Headers;
 using System.Net;
 using Microsoft.Extensions.Options;
 using Rvig.Data.Base.WebApi.Options;
-using Rvig.HaalCentraalApi.Shared.Helpers;
 using Microsoft.AspNetCore.Http;
+using Rvig.BrpApi.Shared.Helpers;
 
 namespace Rvig.Data.Base.Gezag.Repositories
 {
-	public abstract class RepoWebApiBase
+    public abstract class RepoWebApiBase
 	{
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		protected readonly IOptions<WebApiOptions> _webApiOptions;

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Rvig.BrpApi.Shared.Options;
 using Rvig.Data.Base.Services;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
-using Rvig.HaalCentraalApi.Shared.Options;
+using Rvig.BrpApi.Shared.Exceptions;
 
 namespace Rvig.Data.Base.Helpers
 {
-	public static class AfnemerHelper
+    public static class AfnemerHelper
 	{
 		public static Afnemer GetAfnemerInfoFromAuthenticatedUser(IHttpContextAccessor httpContextAccessor)
 		{

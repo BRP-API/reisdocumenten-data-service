@@ -15,10 +15,10 @@ COPY ["Brp.Shared.Infrastructure/Brp.Shared.Infrastructure.csproj", "Brp.Shared.
 COPY ["Serilog.Sinks.PersistentFile/Serilog.Sinks.PersistentFile.csproj", "Serilog.Sinks.PersistentFile/"]
 COPY ["Rvig.Data.Base.WebApi/Rvig.Data.Base.WebApi.csproj", "Rvig.Data.Base.WebApi/"]
 COPY ["Rvig.Data.Base/Rvig.Data.Base.csproj", "Rvig.Data.Base/"]
-COPY ["Rvig.HaalCentraalApi.Shared/Rvig.HaalCentraalApi.Shared.csproj", "Rvig.HaalCentraalApi.Shared/"]
+COPY ["Rvig.BrpApi.Shared/Rvig.BrpApi.Shared.csproj", "Rvig.BrpApi.Shared/"]
 COPY ["Rvig.Data.Base.Postgres/Rvig.Data.Base.Postgres.csproj", "Rvig.Data.Base.Postgres/"]
 COPY ["Rvig.Data.Reisdocumenten/Rvig.Data.Reisdocumenten.csproj", "Rvig.Data.Reisdocumenten/"]
-COPY ["Rvig.HaalCentraalApi.Reisdocumenten/Rvig.HaalCentraalApi.Reisdocumenten.csproj", "Rvig.HaalCentraalApi.Reisdocumenten/"]
+COPY ["Rvig.BrpApi.Reisdocumenten/Rvig.BrpApi.Reisdocumenten.csproj", "Rvig.BrpApi.Reisdocumenten/"]
 RUN dotnet restore "./Reisdocumenten.Data.Service/Reisdocumenten.Data.Service.csproj"
 COPY . .
 WORKDIR "/src/Reisdocumenten.Data.Service"

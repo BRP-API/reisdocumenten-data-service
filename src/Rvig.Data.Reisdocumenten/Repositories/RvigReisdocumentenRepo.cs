@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 using Npgsql;
+using Rvig.BrpApi.Shared.Helpers;
+using Rvig.BrpApi.Shared.Options;
 using Rvig.Data.Base.DatabaseModels;
 using Rvig.Data.Base.Postgres.Repositories;
 using Rvig.Data.Base.Postgres.Repositories.Queries;
 using Rvig.Data.Reisdocumenten.Repositories.Queries;
-using Rvig.HaalCentraalApi.Shared.Helpers;
-using Rvig.HaalCentraalApi.Shared.Options;
 
 namespace Rvig.Data.Reisdocumenten.Repositories;
 public interface IRvigReisdocumentenRepo

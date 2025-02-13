@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rvig.Data.Base;
 using Rvig.Data.Base.Postgres;
-using Rvig.HaalCentraalApi.Shared.Options;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 using FluentValidation.AspNetCore;
@@ -16,11 +15,12 @@ using Rvig.Base.App.Middleware;
 using Rvig.Base.App.Services;
 using Rvig.Base.App.Authentication;
 using FluentValidation;
-using Rvig.HaalCentraalApi.Shared;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.Exceptions;
 using Rvig.Data.Base.WebApi;
 using Serilog;
 using Brp.Shared.Infrastructure.ProblemDetails;
+using Rvig.BrpApi.Shared;
+using Rvig.BrpApi.Shared.Options;
 
 namespace Rvig.Base.App;
 

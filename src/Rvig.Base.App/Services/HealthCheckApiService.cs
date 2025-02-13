@@ -1,5 +1,5 @@
-﻿using Rvig.HaalCentraalApi.Shared.Interfaces;
-using Rvig.Base.App.ResponseModels.HealthCheck;
+﻿using Rvig.Base.App.ResponseModels.HealthCheck;
+using Rvig.BrpApi.Shared.Interfaces;
 
 namespace Rvig.Base.App.Services;
 

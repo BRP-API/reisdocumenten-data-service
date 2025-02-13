@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rvig.HaalCentraalApi.Shared\Rvig.HaalCentraalApi.Shared.csproj" />
+    <ProjectReference Include="..\Rvig.BrpApi.Shared\Rvig.BrpApi.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

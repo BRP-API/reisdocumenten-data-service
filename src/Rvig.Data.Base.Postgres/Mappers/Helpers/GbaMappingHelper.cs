@@ -1,6 +1,6 @@
-﻿using Rvig.Data.Base.Providers;
-using Rvig.HaalCentraalApi.Shared.ApiModels.Universal;
-using Rvig.HaalCentraalApi.Shared.Util;
+﻿using Rvig.BrpApi.Shared.ApiModels.Universal;
+using Rvig.BrpApi.Shared.Util;
+using Rvig.Data.Base.Providers;
 using System.Globalization;
 using System.Text.RegularExpressions;
 

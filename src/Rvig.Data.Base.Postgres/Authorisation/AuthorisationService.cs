@@ -1,5 +1,5 @@
 ﻿using Rvig.Data.Base.Postgres.DatabaseModels;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.Exceptions;
 using System.Reflection;
 using System.Text.RegularExpressions;
 

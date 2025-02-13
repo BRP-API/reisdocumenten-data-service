@@ -4,13 +4,13 @@ using Rvig.Data.Base.Postgres.Services;
 using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Reisdocumenten.Mappers;
 using Rvig.Data.Reisdocumenten.Repositories;
-using Rvig.HaalCentraalApi.Reisdocumenten.ApiModels.Reisdocumenten;
-using Rvig.HaalCentraalApi.Reisdocumenten.Interfaces;
-using Rvig.HaalCentraalApi.Shared.Interfaces;
 using Rvig.Data.Base.Postgres.Repositories;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.Exceptions;
 using Rvig.Data.Base.DatabaseModels;
 using Rvig.Data.Base.Services;
+using Rvig.BrpApi.Reisdocumenten.Interfaces;
+using Rvig.BrpApi.Reisdocumenten.ApiModels.Reisdocumenten;
+using Rvig.BrpApi.Shared.Interfaces;
 
 namespace Rvig.Data.Reisdocumenten.Services;
 public class GetAndMapGbaReisdocumentenService : GetAndMapGbaServiceBase, IGetAndMapGbaReisdocumentenService

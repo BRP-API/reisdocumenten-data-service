@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.Exceptions;
 using System.IO;
 using System.Text;
 

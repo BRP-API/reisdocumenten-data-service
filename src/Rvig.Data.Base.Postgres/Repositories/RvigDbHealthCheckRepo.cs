@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
+using Rvig.BrpApi.Shared.Helpers;
+using Rvig.BrpApi.Shared.Options;
 using Rvig.Data.Base.Postgres.DatabaseModels;
-using Rvig.HaalCentraalApi.Shared.Helpers;
-using Rvig.HaalCentraalApi.Shared.Options;
 
 namespace Rvig.Data.Base.Postgres.Repositories;
 

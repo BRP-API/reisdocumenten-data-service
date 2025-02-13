@@ -3,9 +3,9 @@ using Microsoft.Extensions.Options;
 using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Base.Providers;
 using Rvig.Data.Base.Postgres.Repositories.Queries;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
-using Rvig.HaalCentraalApi.Shared.Helpers;
-using Rvig.HaalCentraalApi.Shared.Options;
+using Rvig.BrpApi.Shared.Exceptions;
+using Rvig.BrpApi.Shared.Options;
+using Rvig.BrpApi.Shared.Helpers;
 
 namespace Rvig.Data.Base.Postgres.Repositories;
 public interface IAutorisationRepo

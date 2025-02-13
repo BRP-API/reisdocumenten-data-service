@@ -1,5 +1,5 @@
-﻿using Rvig.Data.Base.Postgres.Repositories;
-using Rvig.HaalCentraalApi.Shared.Interfaces;
+﻿using Rvig.BrpApi.Shared.Interfaces;
+using Rvig.Data.Base.Postgres.Repositories;
 
 namespace Rvig.Data.Base.Postgres.Services;
 

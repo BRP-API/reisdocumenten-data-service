@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Options;
+using Rvig.BrpApi.Shared.Helpers;
+using Rvig.BrpApi.Shared.Interfaces;
+using Rvig.BrpApi.Shared.Options;
 using Rvig.Data.Base.Postgres.DatabaseModels;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
-using Rvig.HaalCentraalApi.Shared.Helpers;
-using Rvig.HaalCentraalApi.Shared.Interfaces;
-using Rvig.HaalCentraalApi.Shared.Options;
+using Rvig.BrpApi.Shared.Exceptions;
 
 namespace Rvig.Data.Base.Postgres.Repositories;
 // lo3_gemeente is not correct

@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
-using Rvig.HaalCentraalApi.Shared.Helpers;
 using Serilog.Core;
+using Rvig.BrpApi.Shared.Helpers;
 
 namespace Rvig.Base.App.Util;
 

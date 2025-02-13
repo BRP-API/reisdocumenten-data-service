@@ -1,11 +1,11 @@
 ﻿using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Base.Providers;
 using Rvig.Data.Base.Postgres.Repositories;
-using Rvig.HaalCentraalApi.Shared.Interfaces;
+using Rvig.BrpApi.Shared.Interfaces;
 
 namespace Rvig.Data.Base.Postgres.Authorisation
 {
-	public class ProtocolleringService : IProtocolleringService
+    public class ProtocolleringService : IProtocolleringService
 	{
 		private readonly IProtocolleringRepo _protocolleringRepo;
 		public ICurrentDateTimeProvider _currentDateTimeProvider { get; set; }

@@ -1,12 +1,12 @@
-﻿using Rvig.Data.Base.DatabaseModels;
+﻿using Rvig.BrpApi.Reisdocumenten.ApiModels.Reisdocumenten;
+using Rvig.BrpApi.Shared.Helpers;
+using Rvig.Data.Base.DatabaseModels;
 using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Base.Postgres.Helpers;
 using Rvig.Data.Base.Postgres.Mappers;
 using Rvig.Data.Base.Postgres.Mappers.Helpers;
-using Rvig.HaalCentraalApi.Reisdocumenten.ApiModels.Reisdocumenten;
-using Rvig.HaalCentraalApi.Shared.ApiModels.Universal;
-using Rvig.HaalCentraalApi.Shared.Exceptions;
-using Rvig.HaalCentraalApi.Shared.Helpers;
+using Rvig.BrpApi.Shared.ApiModels.Universal;
+using Rvig.BrpApi.Shared.Exceptions;
 
 namespace Rvig.Data.Reisdocumenten.Mappers;
 public interface IRvIGDataReisdocumentenMapper
