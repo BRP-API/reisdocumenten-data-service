@@ -3,14 +3,27 @@ name: continuous integration
 on:
   push:
     paths:
+      - src/**
       - features/**
       - .github/workflows/ci.yml
-      - .docker/reisdocumenten-data-service.yml
   workflow_dispatch:
+    inputs:
+      publishType:
+        description: wat moet worden gereleased?
+        required: true
+        default: 'ci-only'
+        type: choice
+        options:
+          - ci-only
+          - app
 
 env:
   NODE_VERSION: '20'
-  DATA_SERVICE_DOCKER_FILE_PATH: .docker/reisdocumenten-data-service.yml
+  DOTNET_SOLUTION_FILE_PATH: src/ReisdocumentenDataService.sln
+  APP_PROJECT_PATH: ./src/Reisdocumenten.Data.Service
+  APP_CSPROJ_FILE_PATH: ./src/Reisdocumenten.Data.Service/Reisdocumenten.Data.Service.csproj
+  APP_CONTAINER_IMAGE: ghcr.io/brp-api/reisdocumenten-data-service
+  SPEC_VERIFY_STEP_SUMMARY_FILE_PATH: ./test-reports/cucumber-js/reisdocumenten/step-summary.txt
 
 jobs:
   continuous-integration:
@@ -19,21 +32,35 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Haal build run identifier uit Docker manifest
+      - name: Genereer build run identifier
         id: build-run-id
-        uses: ./.github/actions/haal-build-run-identifier-uit-docker-manifest
-        with:
-          path-docker-manifest: ${{ env.DATA_SERVICE_DOCKER_FILE_PATH }}
-      - name: Haal versie uit Docker manifest
-        id: app-version
-        uses: ./.github/actions/haal-versie-uit-docker-manifest
-        with:
-          path-docker-manifest: ${{ env.DATA_SERVICE_DOCKER_FILE_PATH }}
+        uses: ./.github/actions/genereer-build-run-identifier
 
+      - name: Zet versie met build run in App csproj
+        uses: ./.github/actions/zet-versie-met-build-run-in-csproj
+        id: app-version
+        with:
+          path-csproj-file: ${{ env.APP_CSPROJ_FILE_PATH }}
+          build-run: ${{ steps.build-run-id.outputs.build-run }}
+
+      - name: Bepaal de gewijzigde applicatie(s)
+        uses: dorny/paths-filter@v3
+        id: changed-project
+        with:
+          filters: |
+            app:
+              - '${{ env.APP_PROJECT_PATH }}/**'
+  
+      - name: Valideer .NET solution
+        uses: ./.github/actions/valideer-dotnet-solution
+        with:
+          path-solution-file: ${{ env.DOTNET_SOLUTION_FILE_PATH }} 
+          
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+
       - name: Install dependencies
         run: npm ci
 
@@ -45,29 +72,45 @@ jobs:
       - name: Start containers
         run: |
           ./scripts/containers-start.sh ci
+
       - name: Wait for DB restart
         run: sleep 5s
         shell: bash
+
+      - name: Run unit tests
+        run: |
+          ./scripts/unit-tests-verify.sh 
+        
       - name: Valideer functionele specs
         run: |
           ./scripts/specs-verify.sh
+
       - name: Stop containers
         if: always()
         run: |
           ./scripts/containers-stop.sh ci
 
+      - name: Voeg test summary toe aan Github Step Summary
+        if: always()
+        run: |
+          node ./scripts/generate-step-summary.js
+          echo "### Cucumber Test Reports" >> $GITHUB_STEP_SUMMARY
+          cat ${{ env.SPEC_VERIFY_STEP_SUMMARY_FILE_PATH }} >> $GITHUB_STEP_SUMMARY
+
       - name: Genereer test rapportage
         if: always()
         run: |
           node ./scripts/generate-cucumber-reports.js ${{ steps.app-version.outputs.version }} ${{ steps.build-run-id.outputs.build_run }} ${{ github.ref_name }}
+
       - name: Upload test rapportage
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Reports
           path: test-reports
+
       - name: Push test rapportage naar brp-api.github.io repo
-        if: always()
+        if: false
         uses: tech-thinker/push-to-repo@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
@@ -77,3 +120,32 @@ jobs:
           destination-github-username: BRP-API
           target-branch: test-reports/reisdocumenten
           commit-message: "test rapporten van build: ${{ steps.build-run-id.outputs.build-run }}"
+
+      - name: Login to GitHub Container Registry
+        if: always()
+        uses: docker/login-action@v3.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+  
+      - name: Configureer container image builder voor multi-platform
+        if: always()
+        uses: docker/setup-buildx-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+          driver: docker-container
+  
+      - name: Build & push reisdocumenten data service container images naar registry
+        if: always() && (steps.changed-project.outputs.app == 'true' || inputs.publishType == 'app')
+        uses: docker/build-push-action@v6
+        with:
+          file: ${{ env.APP_PROJECT_PATH }}/Dockerfile
+          context: src
+          push: true
+          platforms: linux/arm64,linux/amd64
+          tags: |
+            ${{ env.APP_CONTAINER_IMAGE }}:latest
+            ${{ env.APP_CONTAINER_IMAGE }}:${{ steps.app-version.outputs.version }}-latest
+            ${{ env.APP_CONTAINER_IMAGE }}:${{ steps.app-version.outputs.version }}-${{ steps.build-run-id.outputs.build-run }}
+            ${{ env.APP_CONTAINER_IMAGE }}:${{ github.sha }}

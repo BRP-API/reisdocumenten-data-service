@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Reisdocumenten.Data.Service</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>caf32bce-cb0b-4c54-bc7b-c165686bdcd1</UserSecretsId>
+	  <Version>2.0.12</Version>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <Content Include="..\Rvig.Base.App\appsettings.Development.json" Link="appsettings.Development.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+    <Content Include="..\Rvig.Base.App\appsettings.example.json" Link="appsettings.example.json">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+    <Content Include="..\Rvig.Base.App\appsettings.json" Link="appsettings.json">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.32" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.25.3" />
+    <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
+    <PackageReference Include="Serilog.Formatting.Elasticsearch" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rvig.Base.App\Rvig.Base.App.csproj" />
+    <ProjectReference Include="..\Rvig.Data.Base.Postgres\Rvig.Data.Base.Postgres.csproj" />
+    <ProjectReference Include="..\Rvig.Data.Reisdocumenten\Rvig.Data.Reisdocumenten.csproj" />
+    <ProjectReference Include="..\Rvig.BrpApi.Reisdocumenten\Rvig.BrpApi.Reisdocumenten.csproj" />
+    <ProjectReference Include="..\Rvig.BrpApi.Shared\Rvig.BrpApi.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

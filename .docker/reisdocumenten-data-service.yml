@@ -3,7 +3,7 @@ version: '3.7'
 services:
   reisdocumenten-data-service:
     container_name: reisdocumenten-data-service
-    image: ghcr.io/brp-api/reisdocumenten-data-service:2.0.12-202409021830
+    image: ghcr.io/brp-api/reisdocumenten-data-service:latest
     environment:
       - ASPNETCORE_URLS=http://+;
       - Database__Host=postgres
@@ -14,6 +14,7 @@ services:
       - ProtocolleringAuthorization__UseAuthorizationChecks=false
       - ProtocolleringAuthorization__UseProtocollering=false
       - Ecs__Path=/var/log/reisdocumenten-data-service.json
+      - Ecs__SecuredPath=/var/log/reisdocumenten-data-service-secured.json
       - Ecs__FileSizeLimitBytes=1073741824
       - Ecs__RetainedFileCountLimit=10
       - Serilog__MinimumLevel__Default=Warning

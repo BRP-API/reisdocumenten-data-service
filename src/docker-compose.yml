@@ -1,0 +1,7 @@
+services:
+  reisdocumenten-data-service:
+    image: ghcr.io/brp-api/reisdocumenten-data-service:latest
+    build:
+      context: .
+      dockerfile: Reisdocumenten.Data.Service/Dockerfile
+      
