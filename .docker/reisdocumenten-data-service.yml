@@ -3,7 +3,7 @@ version: '3.7'
 services:
   reisdocumenten-data-service:
     container_name: reisdocumenten-data-service
-    image: ghcr.io/brp-api/reisdocumenten-data-service:2.0.12-202409021830
+    image: ghcr.io/brp-api/reisdocumenten-data-service:latest
     environment:
       - ASPNETCORE_URLS=http://+;
       - Database__Host=postgres
