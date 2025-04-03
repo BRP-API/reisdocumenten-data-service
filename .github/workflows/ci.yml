@@ -82,8 +82,7 @@ jobs:
           ./scripts/unit-tests-verify.sh 
         
       - name: Valideer functionele specs
-        run: |
-          ./scripts/specs-verify.sh
+        uses: ./.github/actions/valideer-functionele-specs
 
       - name: Stop containers
         if: always()

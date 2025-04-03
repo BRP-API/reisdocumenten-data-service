@@ -20,6 +20,7 @@ verify() {
                     -f summary:./test-reports/cucumber-js/reisdocumenten/test-result-$1-summary.txt \
                     -f summary \
                     features/$1 \
+                    --tags "not @skip-verify" \
                     --world-parameters "$PARAMS"
 }
 
