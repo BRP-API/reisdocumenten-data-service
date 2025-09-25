@@ -42,7 +42,7 @@ describe('deleteStatement', () => {
     test.each(
         [
             ['adres', 'lo3_adres', 'adres_id'],
-            ['autorisatie', 'lo3_autorisatie', 'afnemer_code'],
+            ['autorisatie', 'lo3_autorisatie', 'autorisatie_id'],
             ['gemeente', 'lo3_gemeente', 'gemeente_code'],
             ['gezagsverhouding', 'lo3_pl_gezagsverhouding', 'pl_id'],
             ['inschrijving', 'lo3_pl', 'pl_id'],
@@ -117,6 +117,19 @@ describe('insertIntoPersoonlijstStatement', () => {
             text: 'INSERT INTO public.lo3_pl(pl_id,mutatie_dt,geheim_ind) VALUES((SELECT COALESCE(MAX(pl_id), 0)+1 FROM public.lo3_pl),current_timestamp,$1) RETURNING *',
             values: ['0']
         }
+    
+        validate(insertIntoPersoonlijstStatement(input), expected);
+    });
+
+    test("met pl_id", () => {
+        const input = [
+            ["pl_id", 100],
+            ["geheim_ind", "0"]
+        ];
+        const expected = {
+            text: 'INSERT INTO public.lo3_pl(pl_id,mutatie_dt,geheim_ind) VALUES(100,current_timestamp,$1) RETURNING *',
+            values: ['0']
+        };
     
         validate(insertIntoPersoonlijstStatement(input), expected);
     });

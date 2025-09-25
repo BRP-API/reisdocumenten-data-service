@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { processFile } = require('./process-cucumber-file');
 
-const outputFile = path.join(__dirname, './../test-reports/cucumber-js/step-summary.txt');
+const outputFile = path.join(__dirname, './../test-reports/cucumber-js/reisdocumenten/step-summary.txt');
 fs.writeFileSync(outputFile, '', 'utf8');
 
 const fileMap = new Map([
