@@ -27,7 +27,7 @@ public class ValidateVersionHeaderAttribute : ResultFilterAttribute
         {
             throw new CustomInvalidOperationException("API version must always be set.");
         }
-        context.HttpContext.Response.Headers.Add(_versionHeader, version);
+        context.HttpContext.Response.Headers[_versionHeader] = version;
         context.HttpContext.Items.Add(_versionHeader, version);
 
         context.HttpContext.Request.Headers.TryGetValue(_versionHeader, out var versionValue);

@@ -1,9 +1,7 @@
 ﻿using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions;
 
-[Serializable]
 public class CustomInvalidOperationException : InvalidOperationException, IHaalCentraalException
 {
     public HttpStatusCode HttpStatusCode { get => HttpStatusCode.InternalServerError; }
@@ -22,9 +20,5 @@ public class CustomInvalidOperationException : InvalidOperationException, IHaalC
     public CustomInvalidOperationException(string? message, Exception? inner) : base(message, inner)
     {
         Details = message;
-    }
-
-    protected CustomInvalidOperationException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
-    {
     }
 }

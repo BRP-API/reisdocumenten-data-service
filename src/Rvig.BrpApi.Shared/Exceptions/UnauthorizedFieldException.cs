@@ -1,9 +1,7 @@
 ﻿using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions
 {
-    [Serializable]
     public class UnauthorizedFieldException : Exception, IHaalCentraalException
     {
         public HttpStatusCode HttpStatusCode { get => HttpStatusCode.Forbidden; }
@@ -32,10 +30,6 @@ namespace Rvig.BrpApi.Shared.Exceptions
             : base(message, innerException)
         {
             Details = message;
-        }
-
-        protected UnauthorizedFieldException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
         }
     }
 }

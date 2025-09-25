@@ -1,5 +1,4 @@
 using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions
 {
@@ -32,10 +31,6 @@ namespace Rvig.BrpApi.Shared.Exceptions
             : base(message, innerException)
         {
             Details = message;
-        }
-
-        protected UnauthorizedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions;
 
-[Serializable]
 public class InvalidRequestBodyException : Exception, IHaalCentraalException
 {
     public HttpStatusCode HttpStatusCode { get => HttpStatusCode.BadRequest; }
@@ -27,10 +25,5 @@ public class InvalidRequestBodyException : Exception, IHaalCentraalException
     public InvalidRequestBodyException(string? message) : base(message)
     {
         Details = message;
-    }
-
-    protected InvalidRequestBodyException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-        Details = "Request body is geen geldige JSON.";
     }
 }

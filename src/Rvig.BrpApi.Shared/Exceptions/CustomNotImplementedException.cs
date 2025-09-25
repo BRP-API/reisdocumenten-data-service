@@ -1,9 +1,7 @@
 ﻿using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions;
 
-[Serializable]
 public class CustomNotImplementedException : NotImplementedException, IHaalCentraalException
 {
     public HttpStatusCode HttpStatusCode { get => HttpStatusCode.InternalServerError; }
@@ -22,9 +20,5 @@ public class CustomNotImplementedException : NotImplementedException, IHaalCentr
     public CustomNotImplementedException(string? message, Exception? inner) : base(message, inner)
     {
         Details = message;
-    }
-
-    protected CustomNotImplementedException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
-    {
     }
 }

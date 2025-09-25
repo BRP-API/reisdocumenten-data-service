@@ -1,9 +1,7 @@
 using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions;
 
-[Serializable]
 public class AuthenticationException : Exception, IHaalCentraalException
 {
     public HttpStatusCode HttpStatusCode { get => HttpStatusCode.Unauthorized; }
@@ -25,9 +23,5 @@ public class AuthenticationException : Exception, IHaalCentraalException
         : base(message, innerException)
     {
         Details = message;
-    }
-
-    protected AuthenticationException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
     }
 }
