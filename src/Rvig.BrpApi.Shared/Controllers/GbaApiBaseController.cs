@@ -14,7 +14,7 @@ public class GbaApiBaseController : ControllerBase
     {
         if (plIds?.Any() == true)
         {
-            Response.Headers.Add("x-geleverde-pls", string.Join(",", plIds.OrderBy(plId => plId)));
+			Response.Headers["x-geleverde-pls"] = string.Join(",", plIds.OrderBy(plId => plId));
         }
     }
 
@@ -22,7 +22,7 @@ public class GbaApiBaseController : ControllerBase
     {
         if (gemeenteCodes?.Any() == true)
         {
-            Response.Headers.Add("x-geleverde-gemeentecodes", string.Join(",", gemeenteCodes.OrderBy(gemeenteCode => gemeenteCode)));
+			Response.Headers["x-geleverde-gemeentecodes"] = string.Join(",", gemeenteCodes.OrderBy(gemeenteCode => gemeenteCode));
         }
     }
 }

@@ -1,9 +1,7 @@
 using Rvig.BrpApi.Shared.ApiModels.Universal;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions
 {
-    [Serializable]
     public class InvalidParamCombinationException : InvalidParamsException
     {
         public override ErrorCode ErrorCode { get => ErrorCode.paramsCombination; }
@@ -33,10 +31,6 @@ namespace Rvig.BrpApi.Shared.Exceptions
         }
 
         public InvalidParamCombinationException(string message, Exception innerException, IEnumerable<InvalidParams> invalidParams) : base(message, innerException, invalidParams)
-        {
-        }
-
-        protected InvalidParamCombinationException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

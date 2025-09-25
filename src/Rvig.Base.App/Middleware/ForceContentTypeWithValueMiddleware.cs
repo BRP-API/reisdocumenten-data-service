@@ -11,13 +11,13 @@ namespace Rvig.Base.App.Middleware
 
 		public async Task InvokeAsync(HttpContext context)
 		{
-			if (context.Request.Headers.ContainsKey("Accept") && string.IsNullOrWhiteSpace(context.Request.Headers["Accept"]))
+			if (context.Request.Headers.ContainsKey("Accept") && string.IsNullOrWhiteSpace(context.Request.Headers.Accept))
 			{
-				context.Request.Headers["Accept"] = "application/json; charset=utf-8";
+				context.Request.Headers.Accept = "application/json; charset=utf-8";
 			}
 			else if (!context.Request.Headers.ContainsKey("Accept"))
 			{
-				context.Request.Headers.Add("Accept", "application/json; charset=utf-8");
+				context.Request.Headers.Accept = "application/json; charset=utf-8";
 			}
 			if (string.IsNullOrWhiteSpace(context.Request.ContentType))
 			{

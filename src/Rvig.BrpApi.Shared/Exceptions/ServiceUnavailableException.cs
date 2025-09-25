@@ -1,9 +1,7 @@
 ﻿using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions;
 
-[Serializable]
 public class ServiceUnavailableException : Exception, IHaalCentraalException
 {
     public HttpStatusCode HttpStatusCode { get => HttpStatusCode.ServiceUnavailable; }
@@ -25,9 +23,5 @@ public class ServiceUnavailableException : Exception, IHaalCentraalException
         : base(message, innerException)
     {
         Details = message;
-    }
-
-    protected ServiceUnavailableException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
     }
 }

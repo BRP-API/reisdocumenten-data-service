@@ -1,9 +1,7 @@
 using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.BrpApi.Shared.Exceptions
 {
-    [Serializable]
     public class NotAcceptableException : Exception, IHaalCentraalException
     {
         public HttpStatusCode HttpStatusCode { get => HttpStatusCode.NotAcceptable; }
@@ -25,10 +23,6 @@ namespace Rvig.BrpApi.Shared.Exceptions
             : base(message, innerException)
         {
             Details = message;
-        }
-
-        protected NotAcceptableException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
         }
     }
 }
