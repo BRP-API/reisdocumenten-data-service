@@ -6,6 +6,11 @@ on:
       - src/**
       - features/**
       - .github/workflows/ci.yml
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
   workflow_dispatch:
     inputs:
       publishType:
@@ -43,8 +48,8 @@ jobs:
           path-csproj-file: ${{ env.APP_CSPROJ_FILE_PATH }}
           build-run: ${{ steps.build-run-id.outputs.build-run }}
 
-      - name: Bepaal de gewijzigde applicatie(s)
-        uses: dorny/paths-filter@v3
+      - name: Bepaal de gewijzigde applicatie(s) met dorny/paths-filter@v3.0.2
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
         id: changed-project
         with:
           filters: |
@@ -55,24 +60,26 @@ jobs:
         uses: ./.github/actions/valideer-dotnet-solution
         with:
           path-solution-file: ${{ env.DOTNET_SOLUTION_FILE_PATH }} 
-          
+  
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
       - name: Install dependencies
         run: npm ci
 
-      - name: Set run permissions on script folder
+      - name: Zet run permissions op script folder
         uses: ./.github/actions/zet-run-bash-scripts-permission
         with:
           path-bash-file-or-folder: ./scripts/*
 
+      - name: Build container images
+        run: |
+          ./scripts/containers-build.sh
+
       - name: Start containers
         run: |
           ./scripts/containers-start.sh ci
-
       - name: Wait for DB restart
         run: sleep 5s
         shell: bash
@@ -80,9 +87,21 @@ jobs:
       - name: Run unit tests
         run: |
           ./scripts/unit-tests-verify.sh 
-        
+
       - name: Valideer functionele specs
-        uses: ./.github/actions/valideer-functionele-specs
+        run: |
+          ./scripts/specs-verify.sh
+      
+      - name: Genereer step summary
+        if: always()
+        run: |
+          node ./scripts/generate-step-summary.js
+        
+      - name: Voeg test summary toe aan Github Step Summary
+        if: always()
+        run: |
+          echo "### Cucumber Test Reports" >> $GITHUB_STEP_SUMMARY
+          cat test-reports/cucumber-js/reisdocumenten/step-summary.txt >> $GITHUB_STEP_SUMMARY
 
       - name: Stop containers
         if: always()
@@ -92,26 +111,15 @@ jobs:
       - name: Genereer test rapportage
         if: always()
         run: |
-          node ./scripts/generate-cucumber-reports.js ${{ steps.app-version.outputs.version }} ${{ steps.build-run-id.outputs.build_run }} ${{ github.ref_name }}
-
+          node ./scripts/generate-cucumber-reports.js ${{ steps.app-version.outputs.version }} ${{ steps.build-run-id.outputs.build-run }} ${{ github.ref_name }}
       - name: Upload test rapportage
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Reports
-          path: test-reports
-
-      - name: Push test rapportage naar brp-api.github.io repo
-        if: false
-        uses: tech-thinker/push-to-repo@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
-        with:
-          source-directory: test-reports/cucumber-js/reports
-          destination-repository-name: brp-api.github.io
-          destination-github-username: BRP-API
-          target-branch: test-reports/reisdocumenten
-          commit-message: "test rapporten van build: ${{ steps.build-run-id.outputs.build-run }}"
+          path: |
+            test-reports
+            test-data/logs
 
       - name: Login to GitHub Container Registry
         if: always()
@@ -127,7 +135,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           driver: docker-container
-  
+
       - name: Build & push reisdocumenten data service container images naar registry
         if: always() && (steps.changed-project.outputs.app == 'true' || inputs.publishType == 'app')
         uses: docker/build-push-action@v6

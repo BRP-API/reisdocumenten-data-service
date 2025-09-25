@@ -1,5 +1,7 @@
 #!/bin/bash
 
+EXIT_CODE=0
+
 PARAMS="{ \
     \"apiUrl\": \"http://localhost:8000/haalcentraal/api\", \
     \"logFileToAssert\": \"./test-data/logs/reisdocumenten-data-service.json\", \
@@ -12,8 +14,9 @@ npx cucumber-js -f json:./test-reports/cucumber-js/step-definitions/test-result-
                 -f summary:./test-reports/cucumber-js/step-definitions/test-result-zonder-dependency-integratie-summary.txt \
                 -f summary \
                 features/docs \
-                --tags "not @integratie" \
-                --tags "not @skip-verify"
+                -p UnitTest \
+                > /dev/null
+if [ $? -ne 0 ]; then EXIT_CODE=1; fi
 
 verify() {
     npx cucumber-js -f json:./test-reports/cucumber-js/reisdocumenten/test-result-$1.json \

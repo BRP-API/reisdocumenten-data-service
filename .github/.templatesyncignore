@@ -1,8 +1,10 @@
 :!package.json
 :!package-lock.json
+:!cucumber.js
 :!.github/actions/*.*
 :!features/docs/*.*
 :!features/step_definitions/*.*
+:!tests/*.*
 :!src/Brp.Shared.Infrastructure/*.*
 :!src/Serilog.Sinks.PersistentFile/*.*
 :!specificatie/*.*
