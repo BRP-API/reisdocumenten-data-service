@@ -49,7 +49,7 @@ module.exports = {
       },
       addAcceptGezagVersionHeader: true
     },
-    tags: 'not @skip-verify and not @stap-documentatie and not @deprecated and ((not @gezag-api and not @info-api) or @data-api)'
+    tags: 'not @skip-verify and not @deprecated and ((not @gezag-api and not @info-api) or @data-api)'
   },
   DataApiDeprecated: {
     worldParameters: {
@@ -61,7 +61,7 @@ module.exports = {
       },
       addAcceptGezagVersionHeader: false
     },
-    tags: 'not @skip-verify and not @stap-documentatie and ((@deprecated and ((not @gezag-api and not @info-api) or @data-api)) or (not @deprecated and not @nieuw and ((not @gezag-api and not @info-api) or @data-api)))'
+    tags: 'not @skip-verify and ((@deprecated and ((not @gezag-api and not @info-api) or @data-api)) or (not @deprecated and not @nieuw and ((not @gezag-api and not @info-api) or @data-api)))'
   },
   GezagApi: {
     worldParameters: {
@@ -91,13 +91,14 @@ module.exports = {
       apiUrl: 'http://localhost:8080/haalcentraal/api',
       api: 'autorisatie-en-protocollering',
       logger: {
-        level: 'info'
+        level: 'warn'
       },
       oAuth: {
         enable: true
       },
-      addAcceptGezagVersionHeader: true
+      addAcceptGezagVersionHeader: false,
+      logFileToAssert: './test-data/logs/brp-autorisatie-protocollering.json'
     },
-    tags: 'not @skip-verify and not @deprecated and not @gezag-api and not @data-api'
+    tags: 'not @skip-verify and not @stap-documentatie and not @deprecated and not @gezag-api and not @data-api'
   }
 }
