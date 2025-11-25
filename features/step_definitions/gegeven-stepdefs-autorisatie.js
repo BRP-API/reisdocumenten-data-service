@@ -11,11 +11,11 @@ Given(/^de afnemer met indicatie '(.*)' is geautoriseerd voor '(.*)' gegevens$/,
 });
 
 Given(/^de geauthenticeerde consumer heeft de volgende 'claim' gegevens$/, function (dataTable) {
-    this.context.afnemerID = dataTable.hashes()[0].naam !== undefined
+    this.context.afnemerID = dataTable.hashes()[0].naam
         ? dataTable.hashes().find(param => param.naam === 'afnemerID').waarde
         : dataTable.hashes()[0].afnemerID;
 
-        this.context.gemeenteCode = dataTable.hashes()[0].naam !== undefined
+        this.context.gemeenteCode = dataTable.hashes()[0].naam
         ? dataTable.hashes().find(param => param.naam === 'gemeenteCode')?.waarde
         : dataTable.hashes()[0].gemeenteCode;
 });
