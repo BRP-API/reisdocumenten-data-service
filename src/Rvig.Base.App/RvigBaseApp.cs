@@ -1,6 +1,4 @@
 ﻿using Brp.Shared.Infrastructure.Logging;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +8,8 @@ using Rvig.Data.Base;
 using Rvig.Data.Base.Postgres;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
-using FluentValidation.AspNetCore;
 using Rvig.Base.App.Middleware;
 using Rvig.Base.App.Services;
-using FluentValidation;
-using Rvig.BrpApi.Shared.Exceptions;
 using Rvig.Data.Base.WebApi;
 using Serilog;
 using Brp.Shared.Infrastructure.ProblemDetails;
@@ -64,7 +59,7 @@ public static class RvigBaseApp
 			}
 
 			// Loading validators from child app.
-			validatorsToConfigure.ForEach(validator => builder.Services.AddValidatorsFromAssemblyContaining(validator));
+			//validatorsToConfigure.ForEach(validator => builder.Services.AddValidatorsFromAssemblyContaining(validator));
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
@@ -76,7 +71,7 @@ public static class RvigBaseApp
 				options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
 			}).AddNewtonsoftJson();
 
-			builder.Services.AddFluentValidationAutoValidation();
+			//builder.Services.AddFluentValidationAutoValidation();
 
 			builder.Services.Configure<MvcOptions>(options => options.Filters.Add(new ProducesAttribute(Application.Json)));
 			builder.Services.Configure<ApiBehaviorOptions>(options =>
