@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using Rvig.BrpApi.Shared.Helpers;
 using Rvig.BrpApi.Shared.Options;
 using Rvig.Data.Base.Postgres.DatabaseModels;
 
@@ -11,7 +10,7 @@ public interface IRvigDbHealthCheckRepo
 }
 public class RvigDbHealthCheckRepo : PostgresSqlQueryRepoBase<DbHealthCheckResult>, IRvigDbHealthCheckRepo
 {
-	public RvigDbHealthCheckRepo(IOptions<DatabaseOptions> databaseOptions, ILoggingHelper loggingHelper) : base(databaseOptions, loggingHelper)
+	public RvigDbHealthCheckRepo(IOptions<DatabaseOptions> databaseOptions) : base(databaseOptions)
 	{
 		SetWhereMappings();
 		SetMappings();

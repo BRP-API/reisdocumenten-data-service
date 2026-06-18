@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Options;
-using Rvig.BrpApi.Shared.Helpers;
 using Rvig.BrpApi.Shared.Interfaces;
 using Rvig.BrpApi.Shared.Options;
 using Rvig.Data.Base.Postgres.DatabaseModels;
@@ -10,7 +9,7 @@ namespace Rvig.Data.Base.Postgres.Repositories;
 // lo3_gemeente is not correct
 public class DbDomeinTabellenRepo : PostgresRepoBase, IDomeinTabellenRepo
 {
-	public DbDomeinTabellenRepo(IOptions<DatabaseOptions> databaseOptions, ILoggingHelper loggingHelper) : base(databaseOptions, loggingHelper)
+	public DbDomeinTabellenRepo(IOptions<DatabaseOptions> databaseOptions) : base(databaseOptions)
 	{
 	}
 

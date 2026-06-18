@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using Npgsql;
-using Rvig.BrpApi.Shared.Helpers;
 using Rvig.BrpApi.Shared.Options;
 using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Base.Postgres.Repositories.Queries;
@@ -14,7 +13,8 @@ public interface IProtocolleringRepo
 
 public class ProtocolleringRepo : RvigRepoPostgresBase<DbProtocollering>, IProtocolleringRepo
 {
-    public ProtocolleringRepo(IOptions<DatabaseOptions> databaseOptions, IOptions<HaalcentraalApiOptions> haalcentraalApiOptions, ILoggingHelper loggingHelper) : base(databaseOptions, haalcentraalApiOptions, loggingHelper)
+    public ProtocolleringRepo(IOptions<DatabaseOptions> databaseOptions, IOptions<HaalcentraalApiOptions> haalcentraalApiOptions)
+		: base(databaseOptions, haalcentraalApiOptions)
     {
         _haalcentraalApiOptions = haalcentraalApiOptions.Value;
 	}

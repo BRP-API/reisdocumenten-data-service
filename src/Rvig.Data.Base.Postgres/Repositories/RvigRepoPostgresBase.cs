@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Options;
 using Npgsql;
-using Rvig.BrpApi.Shared.Helpers;
 using Rvig.BrpApi.Shared.Options;
 
 namespace Rvig.Data.Base.Postgres.Repositories;
@@ -10,7 +9,7 @@ public abstract class RvigRepoPostgresBase<T> : PostgresSqlQueryRepoBase<T> wher
 {
 	protected HaalcentraalApiOptions _haalcentraalApiOptions { get; set; }
 
-	protected RvigRepoPostgresBase(IOptions<DatabaseOptions> databaseOptions, IOptions<HaalcentraalApiOptions> haalcentraalApiOptions, ILoggingHelper loggingHelper) : base(databaseOptions, loggingHelper)
+	protected RvigRepoPostgresBase(IOptions<DatabaseOptions> databaseOptions, IOptions<HaalcentraalApiOptions> haalcentraalApiOptions) : base(databaseOptions)
 	{
 		_haalcentraalApiOptions = haalcentraalApiOptions.Value;
 		SetWhereMappings();
