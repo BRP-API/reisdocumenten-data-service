@@ -9,7 +9,6 @@ using Rvig.BrpApi.Reisdocumenten.ResponseModels.Reisdocumenten;
 using Rvig.BrpApi.Shared.Interfaces;
 using Rvig.BrpApi.Shared.Services;
 using Rvig.BrpApi.Shared.Options;
-using Rvig.BrpApi.Shared.Helpers;
 using Rvig.BrpApi.Shared.Validation;
 
 namespace Rvig.BrpApi.Reisdocumenten.Services;
@@ -24,8 +23,8 @@ public class GbaReisdocumentenApiService : BaseApiService, IGbaReisdocumentenApi
     protected override ReisdocumentenFieldsSettings _fieldsSettings => new();
     private readonly ReisdocumentenApiToRubriekCategoryHelper _reisdocumentenApiToRubriekCategoryHelper = new();
 
-    public GbaReisdocumentenApiService(IGetAndMapGbaReisdocumentenService getAndMapReisdocumentenService, IDomeinTabellenRepo domeinTabellenRepo, IProtocolleringService protocolleringService, ILoggingHelper loggingHelper, IOptions<ProtocolleringAuthorizationOptions> protocolleringAuthorizationOptions)
-        : base(domeinTabellenRepo, protocolleringService, loggingHelper, protocolleringAuthorizationOptions)
+    public GbaReisdocumentenApiService(IGetAndMapGbaReisdocumentenService getAndMapReisdocumentenService, IDomeinTabellenRepo domeinTabellenRepo, IProtocolleringService protocolleringService, IOptions<ProtocolleringAuthorizationOptions> protocolleringAuthorizationOptions)
+        : base(domeinTabellenRepo, protocolleringService, protocolleringAuthorizationOptions)
     {
         _getAndMapReisdocumentenService = getAndMapReisdocumentenService;
     }

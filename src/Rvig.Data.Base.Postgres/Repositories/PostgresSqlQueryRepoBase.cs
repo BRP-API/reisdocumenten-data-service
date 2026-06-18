@@ -1,14 +1,13 @@
 ﻿using Microsoft.Extensions.Options;
 using Npgsql;
-using Rvig.BrpApi.Shared.Helpers;
 using Rvig.BrpApi.Shared.Options;
 using System.Text.RegularExpressions;
 
 namespace Rvig.Data.Base.Postgres.Repositories;
 public abstract class PostgresSqlQueryRepoBase<T> : PostgresRepoBase where T : class, new()
 {
-	protected PostgresSqlQueryRepoBase(IOptions<DatabaseOptions> databaseOptions, ILoggingHelper loggingHelper)
-		:	base(databaseOptions, loggingHelper)
+	protected PostgresSqlQueryRepoBase(IOptions<DatabaseOptions> databaseOptions)
+		:	base(databaseOptions)
 	{
 	}
 
@@ -85,15 +84,6 @@ public abstract class PostgresSqlQueryRepoBase<T> : PostgresRepoBase where T : c
 			records.Add(record);
 		}
 
-		if (_databaseOptions.Value.LogQueryAsMultiLiner)
-		{
-			_loggingHelper.LogDebug("The query that was executed =  \r\n" + command.CommandText);
-		}
-		else
-		{
-			_loggingHelper.LogDebug("The query that was executed = " + Regex.Replace(Regex.Replace(Regex.Replace(command.CommandText, "\r\n", ""), "\n", ""), "\t", " "));
-		}
-
 		return records;
 	}
 
@@ -106,15 +96,6 @@ public abstract class PostgresSqlQueryRepoBase<T> : PostgresRepoBase where T : c
 		command.Connection = connection;
 
 		var numberOfRowsAffected = await command.ExecuteNonQueryAsync();
-
-		if (_databaseOptions.Value.LogQueryAsMultiLiner)
-		{
-			_loggingHelper.LogDebug("The query that was executed =  \r\n" + command.CommandText + "\r\n Number of rows affected: " + numberOfRowsAffected);
-		}
-		else
-		{
-			_loggingHelper.LogDebug("The query that was executed = " + Regex.Replace(Regex.Replace(Regex.Replace(command.CommandText, "\r\n", ""), "\n", ""), "\t", " ") + " Number of rows affected: " + numberOfRowsAffected);
-		}
 
 		return numberOfRowsAffected;
 	}

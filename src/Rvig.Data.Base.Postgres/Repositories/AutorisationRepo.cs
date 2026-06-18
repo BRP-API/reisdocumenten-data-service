@@ -5,7 +5,6 @@ using Rvig.Data.Base.Providers;
 using Rvig.Data.Base.Postgres.Repositories.Queries;
 using Rvig.BrpApi.Shared.Exceptions;
 using Rvig.BrpApi.Shared.Options;
-using Rvig.BrpApi.Shared.Helpers;
 
 namespace Rvig.Data.Base.Postgres.Repositories;
 public interface IAutorisationRepo
@@ -19,7 +18,7 @@ public class AutorisationRepo : PostgresRepoBase, IAutorisationRepo
     public ICurrentDateTimeProvider _currentDateTimeProvider { get; set; }
 
     public AutorisationRepo(IOptions<DatabaseOptions> databaseOptions, IOptions<HaalcentraalApiOptions> haalcentraalApiOptions, ICurrentDateTimeProvider currentDateTimeProvider
-		, ILoggingHelper loggingHelper) : base(databaseOptions, loggingHelper)
+		) : base(databaseOptions)
     {
         _haalcentraalApiOptions = haalcentraalApiOptions.Value;
         _currentDateTimeProvider = currentDateTimeProvider;
