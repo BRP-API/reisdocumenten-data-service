@@ -110,10 +110,6 @@ jobs:
         run: |
           ./scripts/containers-stop.sh ci
 
-      - name: Genereer test rapportage
-        if: always()
-        run: |
-          node ./scripts/generate-cucumber-reports.js ${{ steps.app-version.outputs.version }} ${{ steps.build-run-id.outputs.build-run }} ${{ github.ref_name }}
       - name: Upload test rapportage
         if: always()
         uses: actions/upload-artifact@v4
