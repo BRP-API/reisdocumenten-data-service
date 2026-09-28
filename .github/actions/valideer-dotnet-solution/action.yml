@@ -10,12 +10,11 @@ runs:
   using: composite
   steps:
     - name: Setup .NET
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: |
-          6.0.x
-          7.0.x
           8.0.x
+          10.0.x
     - name: Restore dependencies
       run: dotnet restore ${{ inputs.path-solution-file }}
       shell: bash
