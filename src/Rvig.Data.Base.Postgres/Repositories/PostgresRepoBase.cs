@@ -47,6 +47,7 @@ public abstract class PostgresRepoBase
 
 	private Task<IEnumerable<TDataObject>> DapperQueryAsync<TDataObject>(NpgsqlConnection connection, string? query, Type[] types, Func<object[], TDataObject> map, object? param = null, IDbTransaction? transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null)
 	{
+		ArgumentNullException.ThrowIfNull(query);
 		try
 		{
 			return connection.QueryAsync(query, types, map, param, transaction, buffered, splitOn, commandTimeout, commandType);
@@ -59,6 +60,7 @@ public abstract class PostgresRepoBase
 
 	private Task<IEnumerable<TDataObject>> DapperQueryAsync<TDataObject>(NpgsqlConnection connection, string? query, DynamicParameters? dynamicParameters = null)
 	{
+		ArgumentNullException.ThrowIfNull(query);
 		try
 		{
 			if (dynamicParameters != null)
