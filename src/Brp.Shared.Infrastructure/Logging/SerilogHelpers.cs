@@ -1,4 +1,4 @@
-﻿using Brp.Shared.Infrastructure.Json;
+using Brp.Shared.Infrastructure.Json;
 using Destructurama;
 using Elastic.CommonSchema;
 using Elastic.CommonSchema.Serilog;
@@ -91,11 +91,11 @@ public static class SerilogHelpers
         var statusCode = httpContext.Response.StatusCode;
 
         return statusCode switch
-            {
-                >= 500 => LogEventLevel.Error,
-                >= 400 => httpContext.ClientErrorLogEventLevel(),
-                _ => httpContext.SuccessfulResponseLogEventLevel()
-            };
+        {
+            >= 500 => LogEventLevel.Error,
+            >= 400 => httpContext.ClientErrorLogEventLevel(),
+            _ => httpContext.SuccessfulResponseLogEventLevel()
+        };
     }
 
     private static LogEventLevel ClientErrorLogEventLevel(this HttpContext httpContext)
@@ -202,7 +202,7 @@ public static class SerilogHelpers
         var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
         config.Enrich.WithEcsHttpContext(httpContextAccessor);
 
-        EcsTextFormatterConfiguration<EcsDocument> ecsTextFormatterConfig = new ()
+        EcsTextFormatterConfiguration<EcsDocument> ecsTextFormatterConfig = new()
         {
             MapCustom = (ecs, logEvent) =>
             {
@@ -324,7 +324,7 @@ public static class SerilogHelpers
             logger.Information("No Path & SecuredPath setting provided. No file logging");
             return;
         }
-        if(!long.TryParse(context.Configuration["Ecs:FileSizeLimitBytes"], out long fileSizeLimitBytes))
+        if (!long.TryParse(context.Configuration["Ecs:FileSizeLimitBytes"], out long fileSizeLimitBytes))
         {
             logger.Information("No/Invalid FileSizeLimitBytes provided. Default to 1 GB");
             fileSizeLimitBytes = 1024 * 1024 * 1024; // 1 GB
