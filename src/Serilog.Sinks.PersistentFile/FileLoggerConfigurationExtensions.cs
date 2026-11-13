@@ -1,4 +1,4 @@
-﻿// Copyright 2013-2017 Serilog Contributors
+// Copyright 2013-2017 Serilog Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.ComponentModel;
-using System.Text;
 using Serilog.Configuration;
 using Serilog.Core;
 using Serilog.Debugging;
@@ -23,6 +20,8 @@ using Serilog.Formatting;
 using Serilog.Formatting.Display;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.PersistentFile;
+using System.ComponentModel;
+using System.Text;
 
 // ReSharper disable RedundantArgumentDefaultValue, MethodOverloadWithOptionalParameter
 

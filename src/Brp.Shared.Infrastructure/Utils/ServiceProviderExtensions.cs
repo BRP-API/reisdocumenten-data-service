@@ -1,4 +1,4 @@
-﻿using Brp.Shared.Infrastructure.Http;
+using Brp.Shared.Infrastructure.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 

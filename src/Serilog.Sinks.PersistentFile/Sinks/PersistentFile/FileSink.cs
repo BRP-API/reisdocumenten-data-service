@@ -12,11 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.IO;
-using System.Text;
 using Serilog.Events;
 using Serilog.Formatting;
+using System.Text;
 
 namespace Serilog.Sinks.PersistentFile
 {
@@ -115,7 +113,7 @@ namespace Serilog.Sinks.PersistentFile
         /// <param name="logEvent">The log event to write.</param>
         public void Emit(LogEvent logEvent)
         {
-            ((IFileSink) this).EmitOrOverflow(logEvent);
+            ((IFileSink)this).EmitOrOverflow(logEvent);
         }
 
         /// <inheritdoc />

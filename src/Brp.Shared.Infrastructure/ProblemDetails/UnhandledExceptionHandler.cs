@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Serilog;
 
 namespace Brp.Shared.Infrastructure.ProblemDetails;

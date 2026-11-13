@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Brp.Shared.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Logging;
 using Microsoft.Extensions.Hosting;
-using Brp.Shared.Infrastructure.Logging;
+using Microsoft.IdentityModel.Logging;
 
 namespace Brp.Shared.Infrastructure.Autorisatie;
 
@@ -18,7 +18,7 @@ public static class SetupAuthenticationHelpers
         }
 
         var authority = builder.Configuration["OAuth:Authority"];
-        if(string.IsNullOrWhiteSpace(authority))
+        if (string.IsNullOrWhiteSpace(authority))
         {
             throw new InvalidOperationException("Authority setting is niet gezet");
         }

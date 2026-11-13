@@ -1,4 +1,4 @@
-﻿namespace Brp.Shared.Infrastructure.Autorisatie;
+namespace Brp.Shared.Infrastructure.Autorisatie;
 
 public interface IAuthorisation
 {
