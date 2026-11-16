@@ -1,4 +1,4 @@
-﻿// Copyright 2013-2019 Serilog Contributors
+// Copyright 2013-2019 Serilog Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,12 +14,9 @@
 
 #if ATOMIC_APPEND
 
-using System;
-using System.IO;
-using System.Security.AccessControl;
-using System.Text;
 using Serilog.Events;
 using Serilog.Formatting;
+using System.Text;
 
 namespace Serilog.Sinks.PersistentFile
 {
@@ -70,7 +67,8 @@ namespace Serilog.Sinks.PersistentFile
             // exposed by .NET Core.
             _fileOutput = new FileStream(
                 path,
-                new FileStreamOptions{
+                new FileStreamOptions
+                {
                     Access = FileAccess.Write,
                     BufferSize = _fileStreamBufferLength,
                     Mode = FileMode.Append,
@@ -94,14 +92,15 @@ namespace Serilog.Sinks.PersistentFile
                     _textFormatter.Format(logEvent, _output);
                     _output.Flush();
                     var bytes = _writeBuffer.GetBuffer();
-                    var length = (int) _writeBuffer.Length;
+                    var length = (int)_writeBuffer.Length;
                     if (length > _fileStreamBufferLength)
                     {
                         var oldOutput = _fileOutput;
 
                         _fileOutput = new FileStream(
                             _path,
-                            new FileStreamOptions{
+                            new FileStreamOptions
+                            {
                                 Access = FileAccess.Write,
                                 Mode = FileMode.Append,
                                 Options = FileOptions.None,

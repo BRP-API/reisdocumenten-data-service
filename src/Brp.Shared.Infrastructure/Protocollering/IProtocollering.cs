@@ -1,4 +1,4 @@
-﻿namespace Brp.Shared.Infrastructure.Protocollering;
+namespace Brp.Shared.Infrastructure.Protocollering;
 
 public interface IProtocollering
 {

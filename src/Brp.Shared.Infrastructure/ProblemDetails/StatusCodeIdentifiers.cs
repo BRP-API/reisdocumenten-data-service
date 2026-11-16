@@ -1,4 +1,4 @@
-﻿namespace Brp.Shared.Infrastructure.ProblemDetails;
+namespace Brp.Shared.Infrastructure.ProblemDetails;
 
 public static class StatusCodeIdentifiers
 {

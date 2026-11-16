@@ -1,4 +1,4 @@
-﻿namespace Brp.Shared.Infrastructure.Text;
+namespace Brp.Shared.Infrastructure.Text;
 
 public static class StringExtensions
 {

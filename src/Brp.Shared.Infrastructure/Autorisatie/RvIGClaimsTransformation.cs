@@ -1,4 +1,4 @@
-﻿using Brp.Shared.Infrastructure.Logging;
+using Brp.Shared.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;

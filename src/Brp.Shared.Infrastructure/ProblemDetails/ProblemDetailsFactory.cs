@@ -1,4 +1,4 @@
-﻿using Brp.Shared.Infrastructure.Autorisatie;
+using Brp.Shared.Infrastructure.Autorisatie;
 using Microsoft.AspNetCore.Http;
 using System.Text;
 

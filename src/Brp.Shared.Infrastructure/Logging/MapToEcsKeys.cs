@@ -1,4 +1,4 @@
-﻿namespace Brp.Shared.Infrastructure.Logging;
+namespace Brp.Shared.Infrastructure.Logging;
 
 internal static class MapToEcsKeys
 {
